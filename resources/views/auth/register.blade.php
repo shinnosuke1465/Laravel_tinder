@@ -1,52 +1,89 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+@extends('layouts.layout')
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+@section('content')
+<div class="signupPage">
+  <header class="header">
+    <div>アカウントを作成</div>
+  </header>
+  <div class='container m-0 m-auto'>
+
+    <form class="form mt-5" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+    @csrf
+
+      <label for="file_photo" class="rounded-full userProfileImg">
+        <div class="userProfileImg_description">画像をアップロード</div>
+        <i class="fas fa-camera fa-3x"></i>
+        <input type="file" id="file_photo"  accept="image/*" name="img_name">
+
+      </label>
+      <div class="userImgPreview" id="userImgPreview">
+        <img id="thumbnail" class="userImgPreview_content" src="">
+        <p class="userImgPreview_text">画像をアップロード済み</p>
+      </div>
+      <div class="form-group p-2 w-full mx-auto @error('name')has-error @enderror">
+        <label>名前</label>
+        <input type="text" name="name" class="form-control w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="名前を入力してください">
+        @error('name')
+            <span class="errorMessage">
+              {{ $message }}
+            </span>
+        @enderror
+    </div>
+      <div class="form-group p-2 mx-auto @error('email')has-error @enderror">
+        <label>メールアドレス</label>
+        <input type="email" name="email" class="form-control w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="メールアドレスを入力してください">
+        @error('email')
+            <span class="errorMessage">
+              {{ $message }}
+            </span>
+        @enderror
+      </div>
+      <div class="form-group p-2 mx-auto @error('password')has-error @enderror">
+        <label>パスワード</label>
+        <em>6文字以上入力してください</em>
+        <input type="password" name="password" class="form-control w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="パスワードを入力してください">
+        @error('password')
+            <span class="errorMessage">
+              {{ $message }}
+            </span>
+        @enderror
+    </div>
+      <div class="form-group p-2 mx-auto">
+        <label>確認用パスワード</label>
+        <input type="password" name="password_confirmation" class="form-control w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="パスワードを再度入力してください">
+      </div>
+      <div class="form-group p-2 mx-auto">
+        <div><label>性別</label></div>
+        <div class="relative flex">
+        <div class="form-check form-check-inline mr-2">
+          <input class="form-check-input mr-2" name="sex" value="0" type="radio" id="inlineRadio1" checked>
+          <label class="form-check-label" for="inlineRadio1">男</label>
         </div>
-
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div class="form-check form-check-inline">
+        <input class="form-check-input mr-2" name="sex" value="1" type="radio" id="inlineRadio2">
+          <label class="form-check-label" for="inlineRadio2">女</label>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+    </div>
+      </div>
+      <div class="form-group p-2 mx-auto @error('self_introduction')has-error @enderror">
+        <label>自己紹介文</label>
+        <textarea class="form-control w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" name="self_introduction" rows="10"></textarea>
+          @error('self_introduction')
+          <span class="errorMessage">
+            {{ $message }}
+          </span>
+          @enderror
         </div>
+    </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ml-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
+      <div class="text-center">
+      <button type="submit" class="btn submitBtn">はじめる</button>
+      <div class="linkToLogin">
+        <a href="{{ route('login') }}">ログインはこちら</a>
+      </div>
+      </div>
     </form>
-</x-guest-layout>
+  </div>
+</div>
+@endsection
+

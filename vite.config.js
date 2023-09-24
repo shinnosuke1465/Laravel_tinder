@@ -16,5 +16,11 @@ export default defineConfig({
         hmr: {
             host: 'localhost'
         }
-    }
+    },
+    resolve: {
+        alias: {
+        // @@@ ↓追記
+        '$': 'jQuery',
+        },
+        },
 });

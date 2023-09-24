@@ -1,6 +1,11 @@
+import '@fortawesome/fontawesome-free/js/all.js';
 import './bootstrap';
 
-import '@fortawesome/fontawesome-free/js/all.js';
+//ここを追記
+import './users';
+
+import jQuery from 'jquery';
+window.$ = jQuery;
 
 import Alpine from 'alpinejs';
 
