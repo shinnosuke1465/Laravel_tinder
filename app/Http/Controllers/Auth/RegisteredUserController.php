@@ -30,11 +30,6 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $imageFile = $request->image;
-        if (!is_null($imageFile) && $imageFile->isValid()) {
-            //画像とフォルダ名を渡す
-            $fileNameToStore = ImageService::upload($imageFile, 'shops');
-        }
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
@@ -43,13 +38,19 @@ class RegisteredUserController extends Controller
             'self_introduction' => ['string', 'max:255'], //この行を追加します
         ]);
 
+        $imageFile = $request->image;
+        if (!is_null($imageFile) && $imageFile->isValid()) {
+            //画像とフォルダ名を渡す
+            $fileNameToStore = ImageService::upload($imageFile, 'shops');
+        }
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'self_introduction' => $request['self_introduction'],
             'sex' => $request['sex'],
-            'img_name' => $request['img_name'],
+            'img_name' => $fileNameToStore,
         ]);
 
         event(new Registered($user));

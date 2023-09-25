@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::prefix('users')->middleware('auth')->group(function(){
+    Route::get('show/{id}',[UserController::class, 'show'])->name('user.show');
+    Route::get('edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+    Route::get('update/{id}', [UserController::class, 'update'])->name('users.update');
+});
+
 Route::get('/', function () {
     return view('top');
-});
+})->name('top');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
