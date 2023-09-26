@@ -6,7 +6,7 @@
     <div>プロフィールを編集</div>
   </header>
 
-    <form class="form mt-5" method="POST" action="/users/update/{{ $user->id }}" enctype="multipart/form-data">
+    <form class="form mt-5 flex flex-col items-center" method="POST" action="/users/update/{{ $user->id }}" enctype="multipart/form-data">
     @csrf
 
     @error('email')
