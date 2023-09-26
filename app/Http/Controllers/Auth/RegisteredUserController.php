@@ -10,8 +10,10 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Services\ImageService;
 
 class RegisteredUserController extends Controller
 {
@@ -38,10 +40,10 @@ class RegisteredUserController extends Controller
             'self_introduction' => ['string', 'max:255'], //この行を追加します
         ]);
 
-        $imageFile = $request->image;
+        $imageFile = $request->file_photo;
         if (!is_null($imageFile) && $imageFile->isValid()) {
             //画像とフォルダ名を渡す
-            $fileNameToStore = ImageService::upload($imageFile, 'shops');
+            $fileNameToStore = ImageService::upload($imageFile);
         }
 
         $user = User::create([
@@ -50,7 +52,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'self_introduction' => $request['self_introduction'],
             'sex' => $request['sex'],
-            'img_name' => $fileNameToStore,
+            // 'img_name' => $fileNameToStore,
         ]);
 
         event(new Registered($user));

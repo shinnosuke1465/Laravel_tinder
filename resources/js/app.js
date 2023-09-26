@@ -1,14 +1,28 @@
-import '@fortawesome/fontawesome-free/js/all.js';
-import './bootstrap';
-
-//ここを追記
-import './users';
-
 import jQuery from 'jquery';
 window.$ = jQuery;
+// import './bootstrap';
 
-import Alpine from 'alpinejs';
+// require('./users')
+$(function () {
+  $('#test_jquery').on('click', function() {
+      alert("Hello, jQuery!");
+  })
+})
+// import Alpine from 'alpinejs';
 
-window.Alpine = Alpine;
+// window.Alpine = Alpine;
 
 Alpine.start();
+$(document).on("change", "#file_photo", function(e) {
+  var reader;
+  if (e.target.files.length) {
+    reader = new FileReader;
+    reader.onload = function(e) {
+      var userThumbnail;
+      userThumbnail = document.getElementById('thumbnail');
+      $("#userImgPreview").addClass("is-active");
+      userThumbnail.setAttribute('src', e.target.result);
+    };
+    return reader.readAsDataURL(e.target.files[0]);
+  }
+});

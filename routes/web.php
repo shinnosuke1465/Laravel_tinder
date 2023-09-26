@@ -17,7 +17,7 @@ use App\Http\Controllers\UserController;
 Route::prefix('users')->middleware('auth')->group(function(){
     Route::get('show/{id}',[UserController::class, 'show'])->name('user.show');
     Route::get('edit/{id}', [UserController::class, 'edit'])->name('users.edit');
-    Route::get('update/{id}', [UserController::class, 'update'])->name('users.update');
+    Route::post('update/{id}', [UserController::class, 'update'])->name('users.update');
 });
 
 Route::get('/', function () {

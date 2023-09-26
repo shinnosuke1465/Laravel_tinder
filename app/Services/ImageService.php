@@ -9,7 +9,7 @@ use InterventionImage;
 class ImageService
 {
 //画像とフォルダ名が渡される
-  public static function upload($imageFile, $folderName){
+  public static function upload($imageFile){
     //dd($imageFile['image']);
     if(is_array($imageFile))
     {
