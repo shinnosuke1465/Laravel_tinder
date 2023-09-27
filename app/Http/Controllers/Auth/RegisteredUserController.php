@@ -30,7 +30,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -52,13 +52,13 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'self_introduction' => $request['self_introduction'],
             'sex' => $request['sex'],
-            // 'img_name' => $fileNameToStore,
+            'img_name' => $fileNameToStore,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        // return redirect(RouteServiceProvider::HOME);
     }
 }

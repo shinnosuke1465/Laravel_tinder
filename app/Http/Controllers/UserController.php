@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-namespace App\Http\Controllers;
 use InterventionImage;
 use Illuminate\Support\Facades\Storage;
 use App\Services\ImageService;
@@ -35,11 +34,11 @@ class UserController extends Controller
     //$idにあうユーザー情報を取得
     $user = User::findorFail($id);
 
-    $imageFile = $request->image;
+    $imageFile = $request->file_photo;
     //画像ファイルがアップロードされているかどうかを判定
     if (!is_null($imageFile)) {
       //画像とフォルダ名を渡す
-      $fileNameToStore = ImageService::upload($imageFile, 'images');
+      $fileNameToStore = ImageService::upload($imageFile);
     }
 
     $user->name = $request->name;
