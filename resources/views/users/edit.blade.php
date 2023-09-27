@@ -18,17 +18,17 @@
       <label for="file_photo" class="rounded-circle userProfileImg">
         <div class="userProfileImg_description">画像をアップロード</div>
         <i class="fas fa-camera fa-3x"></i>
-        <input type="file" id="file_photo" name="img_name">
+        <input type="file" id="file_photo" name="file_photo" accept="image/*">
 
       </label>
       <div class="userImgPreview" id="userImgPreview">
-        <img id="thumbnail" class="userImgPreview_content" accept="image/*" src="">
+        {{-- <img id="thumbnail" class="userImgPreview_content" accept="image/*" src=""> --}}
+        <x-thumbnail :filename="$user->img_name" type="images" />
         <p class="userImgPreview_text">画像をアップロード済み</p>
       </div>
       <div class="form-group">
         <label>名前</label>
         <input type="text" name="name" class="form-control" value="{{ $user->name }}">
-  
     </div>
       <div class="form-group">
         <label>メールアドレス</label>
