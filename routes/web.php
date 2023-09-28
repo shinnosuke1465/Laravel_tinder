@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +21,8 @@ Route::prefix('users')->middleware('auth')->group(function(){
     Route::get('edit/{id}', [UserController::class, 'edit'])->name('users.edit');
     Route::post('update/{id}', [UserController::class, 'update'])->name('users.update');
 });
+
+Route::get('/home',[HomeController::class, 'index'])->name('home');
 
 Route::get('/', function () {
     return view('top');

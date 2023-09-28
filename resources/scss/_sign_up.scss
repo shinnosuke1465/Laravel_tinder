@@ -56,7 +56,9 @@ body {
     display: none;
     text-align: center;
     &.is-active {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     &_content {
       max-width: 100px;

@@ -19,6 +19,7 @@
         <img id="thumbnail" class="userImgPreview_content" src="">
         <p class="userImgPreview_text">画像をアップロード済み</p>
       </div>
+
       <div class="form-group p-2 w-full mx-auto @error('name')has-error @enderror">
         <label>名前</label>
         <input type="text" name="name" class="form-control w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="名前を入力してください">
