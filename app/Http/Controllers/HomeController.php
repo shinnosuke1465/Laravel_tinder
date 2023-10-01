@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -12,10 +13,16 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
+    public function index()
+    {
         //自分以外のユーザー情報を取得
         $users = User::where('id', '<>', \Auth::user()->id)->get();
 
-        return view('home', compact('users'));
+        //全ユーザーの数を取得
+        $userCount = $users->count();
+        //現在ログインしているユーザーのIDを取得
+        $from_user_id = Auth::id();
+
+        return view('home', compact('users', 'userCount', 'from_user_id'));
     }
 }
