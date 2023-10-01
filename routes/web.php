@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MatchingController;
+use App\Http\Controllers\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,12 @@ Route::prefix('users')->middleware('auth')->group(function(){
 });
 
 Route::get('/home',[HomeController::class, 'index'])->name('home');
+
+Route::get('/matching',[MatchingController::class, 'index'])->name('matching');
+
+Route::prefix('chat')->middleware('auth')->group(function(){
+    Route::post('show',[ChatController::class, 'show'])->name('chat.show');
+});
 
 Route::get('/', function () {
     return view('top');

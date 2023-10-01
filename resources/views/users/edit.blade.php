@@ -22,8 +22,8 @@
 
       </label>
       <div class="userImgPreview" id="userImgPreview">
-        {{-- <img id="thumbnail" class="userImgPreview_content" accept="image/*" src=""> --}}
-        <x-thumbnail :filename="$user->img_name" type="images" />
+        <img id="thumbnail" class="userImgPreview_content" accept="image/*" src="">
+        {{-- <x-thumbnail :filename="$user->img_name" type="images" /> --}}
         <p class="userImgPreview_text">画像をアップロード済み</p>
       </div>
       <div class="form-group">
