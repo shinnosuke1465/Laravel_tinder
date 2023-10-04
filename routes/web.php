@@ -30,6 +30,7 @@ Route::get('/matching',[MatchingController::class, 'index'])->name('matching');
 
 Route::prefix('chat')->middleware('auth')->group(function(){
     Route::post('show',[ChatController::class, 'show'])->name('chat.show');
+    Route::post('chat',[ChatController::class, 'chat'])->name('chat.chat');
 });
 
 Route::get('/', function () {
