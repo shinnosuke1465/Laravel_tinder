@@ -17,9 +17,10 @@ $(document).ready(function() {
                   user_id: user_id,
                   message: $('.messageInputForm_input').val(),
               },
-          
+              error: function(jqXHR, textStatus, errorThrown) {
+                console.log("Error:", textStatus, errorThrown);
+                console.log(jqXHR.responseText);}
           })
-          
           .done(function(data){
               //console.log(data);
               event.target.value = '';
@@ -28,21 +29,21 @@ $(document).ready(function() {
       }
   });
 
-  window.Echo.channel('ChatRoomChannel')
+  window.Echo.channel('channel-name')
   .listen('ChatPusher', (e) => {
       console.log(e, e.message.user_id);
       if(e.message.user_id === user_id){
           console.log(true);
       $('.messages').append(
-          '<div class="message"><span>' + current_user_name + 
+          '<div class="message"><span>' + current_user_name +
           ':</span><div class="commonMessage"><div>' +
           e.message.message + '</div></div></div>');
       }else{
           console.log(false);
       $('.messages').append(
-          '<div class="message"><span>' + chat_room_user_name + 
+          '<div class="message"><span>' + chat_room_user_name +
           ':</span><div class="commonMessage"><div>' +
-          e.message.message + '</div></div></div>');    
+          e.message.message + '</div></div></div>');
       }
   });
 

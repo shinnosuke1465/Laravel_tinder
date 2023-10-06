@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ChatRoom;
+use App\Models\User;
 
 class ChatMessage extends Model
 {
@@ -12,11 +14,11 @@ class ChatMessage extends Model
 
     public function chatRoom()
     {
-        return $this->belongsTo('App\ChatRoom');
+        return $this->belongsTo(ChatRoom::class);
     }
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 }

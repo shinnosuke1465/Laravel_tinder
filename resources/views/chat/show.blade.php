@@ -19,7 +19,6 @@
       @else
         <span>{{$chat_room_user_name}}</span>
       @endif
-      
       <div class="commonMessage">
         <div>
         {{$message->message}}
