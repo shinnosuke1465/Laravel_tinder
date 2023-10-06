@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Reaction;
+use App\Models\ChatMessage;
+use App\Models\ChatRoomUser;
 
 class User extends Authenticatable
 {
@@ -43,21 +46,21 @@ class User extends Authenticatable
 
     public function toUserId()
     {
-        return $this->hasMany('App\Reaction', 'to_user_id', 'id');
+        return $this->hasMany(Reaction::class, 'to_user_id', 'id');
     }
 
     public function fromUserId()
     {
-        return $this->hasMany('App\Reaction', 'from_user_id', 'id');
+        return $this->hasMany(Reaction::class, 'from_user_id', 'id');
     }
-    
+
     public function chatMessages()
     {
-        return $this->hasMany('App\ChatMessage');
+        return $this->hasMany(ChatMessage::class);
     }
 
     public function chatRoomUsers()
     {
-        return $this->hasMany('App\ChatRoomUsers');
+        return $this->hasMany(ChatRoomUser::class);
     }
 }
